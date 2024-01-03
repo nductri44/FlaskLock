@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2 class="fw-bold">Stranger Face Used</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" class="col text-center text-white bg-primary">ID</th>
+      <th scope="col" class="col text-center text-white bg-primary">Picture</th>
+      <th scope="col" class="col text-center text-white bg-primary">Name</th>
+      <th scope="col" class="col text-center text-white bg-primary">Probability</th>
+      <th scope="col" class="col text-center text-white bg-primary">Detected at</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if places %}
+        {% for key, value in places.items()|reverse %}
+            <tr>
+                <td class="col-1 text-center">{{ loop.revindex }}</td>
+                <td class="col-1 text-center"><img src="{{ url_for( 'static', filename='face_images/negative/{}.jpg'.format(value['Datetime']) ) }}" class="image" width="200" height="150"/></td>
+                <td class="col-3 text-center">{{ value['Name'] }}</td>
+                <td class="col-3 text-center">{{ value['Probability'] }}</td>
+                <td class="col-5 text-center">{{ value['Detected_at'] }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="5" class="text-center"><h2>No data available</h2></td>
+        </tr>
+    {% endif %}
+  </tbody>
+</table>
+  
+{% endblock %}

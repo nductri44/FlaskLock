@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2 class="fw-bold">Familiar Finger Used</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" class="col text-center text-white bg-primary">ID</th>
+      <th scope="col" class="col text-center text-white bg-primary">Finger_ID</th>
+      <th scope="col" class="col text-center text-white bg-primary">Confidence</th>
+      <th scope="col" class="col text-center text-white bg-primary">Detected at</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if places %}
+        {% for key, value in places.items()|reverse %}
+            <tr>
+                <td class="col-1 text-center">{{ loop.revindex }}</td>
+                <td class="col-3 text-center">{{ value['Finger_ID'] }}</td>
+                <td class="col-3 text-center">{{ value['Confidence'] }}</td>
+                <td class="col-5 text-center">{{ value['Detected_at'] }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="5" class="text-center"><h2>No data available</h2></td>
+        </tr>
+    {% endif %}
+  </tbody>
+</table>
+  
+{% endblock %}
